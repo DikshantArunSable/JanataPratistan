@@ -20,9 +20,18 @@ const dateLabel = d => new Date(d).toLocaleDateString('en-IN',{day:'numeric',mon
           <div class="actions"><a class="btn" href="#events">Explore the journal <span aria-hidden="true">↘</span></a><a class="btn btn-outline" href="#about">Discover our story</a></div>
           <div class="hero-meta">Community · Stories · Shared progress</div>
         </div>
-        <div class="hero-img-wrap">
-          <img class="hero-img" src="https://images.unsplash.com/photo-1559027615-cd4628902d4a?auto=format&fit=crop&w=1400&q=88" alt="Community volunteers working together around a table" fetchpriority="high" />
-          <div class="image-note">Small moments. Shared purpose. Lasting change.</div>
+        <div class="hero-img-wrap hero-carousel" aria-label="Janata Pratisthan community photo carousel">
+          <div class="hero-slides" id="hero-slides">
+            <figure class="hero-slide is-active" data-slide="0" aria-hidden="false"><img class="hero-img" src="/carousel/1.png" alt="Janata Pratisthan community members gathered together" fetchpriority="high" /><figcaption class="image-note">Together, we build stronger communities.</figcaption></figure>
+            <figure class="hero-slide" data-slide="1" aria-hidden="true"><img class="hero-img" src="/carousel/2.png" alt="A community teaching and learning gathering" loading="lazy" /><figcaption class="image-note">Knowledge grows when it is shared.</figcaption></figure>
+            <figure class="hero-slide" data-slide="2" aria-hidden="true"><img class="hero-img" src="/carousel/3.png" alt="Community members taking part in a diya ceremony" loading="lazy" /><figcaption class="image-note">Tradition, dignity, and shared purpose.</figcaption></figure>
+          </div>
+          <div class="hero-carousel-controls">
+            <button class="hero-arrow" type="button" id="hero-prev" aria-label="Previous photo">←</button>
+            <div class="hero-dots" role="group" aria-label="Choose a photo"><button type="button" class="hero-dot is-active" data-go="0" aria-label="Show photo 1" aria-pressed="true"></button><button type="button" class="hero-dot" data-go="1" aria-label="Show photo 2" aria-pressed="false"></button><button type="button" class="hero-dot" data-go="2" aria-label="Show photo 3" aria-pressed="false"></button></div>
+            <button class="hero-arrow" type="button" id="hero-next" aria-label="Next photo">→</button>
+            <button class="hero-pause" type="button" id="hero-pause" aria-label="Pause automatic slideshow" aria-pressed="false">Ⅱ</button>
+          </div>
         </div>
       </div>
     </section>
@@ -53,5 +62,49 @@ const dateLabel = d => new Date(d).toLocaleDateString('en-IN',{day:'numeric',mon
     document.querySelectorAll('[data-dir]').forEach(button => button.addEventListener('click', () => {
       if (track) track.scrollBy({ left: Number(button.dataset.dir) * Math.min(track.clientWidth * .8, 420), behavior: 'smooth' });
     }));
+
+    const heroSlides = [...document.querySelectorAll('.hero-slide')];
+    const heroDots = [...document.querySelectorAll('.hero-dot')];
+    const heroPrev = document.querySelector('#hero-prev');
+    const heroNext = document.querySelector('#hero-next');
+    const heroPause = document.querySelector('#hero-pause');
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let heroIndex = 0;
+    let heroTimer = null;
+    let heroPaused = reduceMotion;
+    function showHeroSlide(index) {
+      heroIndex = (index + heroSlides.length) % heroSlides.length;
+      heroSlides.forEach((slide, i) => {
+        const active = i === heroIndex;
+        slide.classList.toggle('is-active', active);
+        slide.setAttribute('aria-hidden', String(!active));
+      });
+      heroDots.forEach((dot, i) => {
+        const active = i === heroIndex;
+        dot.classList.toggle('is-active', active);
+        dot.setAttribute('aria-pressed', String(active));
+      });
+    }
+    function stopHeroTimer() { if (heroTimer) window.clearInterval(heroTimer); heroTimer = null; }
+    function startHeroTimer() {
+      stopHeroTimer();
+      if (!heroPaused && heroSlides.length > 1) heroTimer = window.setInterval(() => showHeroSlide(heroIndex + 1), 5500);
+      if (heroPause) {
+        heroPause.textContent = heroPaused ? '▶' : 'Ⅱ';
+        heroPause.setAttribute('aria-label', heroPaused ? 'Resume automatic slideshow' : 'Pause automatic slideshow');
+        heroPause.setAttribute('aria-pressed', String(heroPaused));
+      }
+    }
+    heroPrev?.addEventListener('click', () => { showHeroSlide(heroIndex - 1); startHeroTimer(); });
+    heroNext?.addEventListener('click', () => { showHeroSlide(heroIndex + 1); startHeroTimer(); });
+    heroDots.forEach(dot => dot.addEventListener('click', () => { showHeroSlide(Number(dot.dataset.go)); startHeroTimer(); }));
+    heroPause?.addEventListener('click', () => { heroPaused = !heroPaused; startHeroTimer(); });
+    document.querySelector('.hero-carousel')?.addEventListener('mouseenter', stopHeroTimer);
+    document.querySelector('.hero-carousel')?.addEventListener('mouseleave', startHeroTimer);
+    document.querySelector('.hero-carousel')?.addEventListener('focusin', stopHeroTimer);
+    document.querySelector('.hero-carousel')?.addEventListener('focusout', startHeroTimer);
+    document.addEventListener('visibilitychange', () => document.hidden ? stopHeroTimer() : startHeroTimer());
+    showHeroSlide(0);
+    startHeroTimer();
   </script>
 </Base>
