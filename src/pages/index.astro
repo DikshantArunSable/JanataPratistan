@@ -1,0 +1,35 @@
+---
+import Base from '../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+const allEvents = await getCollection('events', ({ data }) => !data.draft);
+const events = allEvents.sort((a,b) => new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf());
+const featured = events.filter(e => e.data.featured).slice(0,5);
+const cards = featured.length ? featured : events.slice(0,5);
+const recent = events.slice(0,3);
+const dateLabel = d => new Date(`${d}T12:00:00`).toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'});
+---
+<Base title="Janata Pratisthan | People First. Progress Together." description="Discover the events, community initiatives, and stories of Janata Pratisthan.">
+  <main>
+    <section class="hero"><div class="container hero-grid"><div>
+      <span class="eyebrow">People first. Progress together.</span>
+      <h1>Every community has a story. <span>Let's tell it.</span></h1>
+      <p>Welcome to Janata Pratisthan. Explore our events, community initiatives, and the moments that reflect our shared journey toward a brighter future.</p>
+      <div class="actions"><a class="btn" href="#events">Explore our events →</a><a class="btn btn-yellow" href="#donate">Support our work</a></div>
+    </div><img class="hero-img" src="https://images.unsplash.com/photo-1559027615-cd4628902d4a?auto=format&fit=crop&w=1200&q=85" alt="Community volunteers working together" /></div></section>
+    <section class="section" id="about"><div class="container"><div class="heading"><span class="eyebrow">About Janata Pratisthan</span><h2>People, purpose, and progress.</h2><p>We believe community stories deserve to be remembered. This space brings together our events, initiatives, and updates so supporters can follow our journey and see the work behind every milestone.</p></div></div></section>
+    <section class="section split" id="events"><div class="container"><div style="display:flex;justify-content:space-between;align-items:end;gap:20px;flex-wrap:wrap"><div class="heading"><span class="eyebrow">From our community</span><h2>Featured events</h2><p>Highlights from our activities and annual events.</p></div><div class="carousel-controls"><button type="button" data-dir="-1" aria-label="Previous events">‹</button><button type="button" data-dir="1" aria-label="Next events">›</button></div></div>
+      {cards.length ? <div class="carousel" id="event-carousel">{cards.map(event => <article class="card"><a href={`/events/${event.slug}/`}>{event.data.cover && <img src={event.data.cover} alt={event.data.title} loading="lazy" />}<div class="card-content"><span class="tag">{event.data.category}</span><h3>{event.data.title}</h3><p>{event.data.excerpt}</p><div class="meta">{dateLabel(event.data.date)}</div><p class="read">Read the story →</p></div></a></article>)}</div> : <div class="empty">Our event stories will appear here soon. Check back for updates.</div>}
+      <p style="margin-top:20px"><a class="btn" href="/events/">Browse all events →</a></p>
+    </div></section>
+    <section class="section"><div class="container"><div class="heading"><span class="eyebrow">Latest stories</span><h2>News &amp; updates</h2><p>Read about recent activities and the people who make them possible.</p></div>
+      {recent.length ? <div class="grid">{recent.map(event => <article class="card"><a href={`/events/${event.slug}/`}>{event.data.cover && <img src={event.data.cover} alt={event.data.title} loading="lazy" />}<div class="card-content"><span class="tag">{event.data.category}</span><h3>{event.data.title}</h3><p>{event.data.excerpt}</p><div class="meta">{dateLabel(event.data.date)}</div><p class="read">Read more →</p></div></a></article>)}</div> : <div class="empty">No published stories yet. Add your first event from the publishing dashboard.</div>}
+    </div></section>
+    <section class="cta" id="donate"><div class="container"><span class="eyebrow">Be part of the journey</span><h2>Help create more stories worth sharing.</h2><p>Your time, encouragement, and support can help community initiatives grow. Replace this sample destination with your official donation page.</p><a class="btn btn-yellow" href="https://example.org/donate" target="_blank" rel="noopener noreferrer">Donate to Janata Pratisthan ↗</a></div></section>
+  </main>
+  <script is:inline>
+    const track = document.querySelector('#event-carousel');
+    document.querySelectorAll('[data-dir]').forEach(button => button.addEventListener('click', () => {
+      if (track) track.scrollBy({ left: Number(button.dataset.dir) * Math.min(track.clientWidth * .8, 420), behavior: 'smooth' });
+    }));
+  </script>
+</Base>
