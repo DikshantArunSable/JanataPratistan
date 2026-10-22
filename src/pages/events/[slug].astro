@@ -9,16 +9,16 @@ export async function getStaticPaths() {
 const { event } = Astro.props;
 const { Content } = await render(event);
 const d = event.data.date;
-const dateLabel = new Date(`${d}T12:00:00`).toLocaleDateString('en-IN',{day:'numeric',month:'long',year:'numeric'});
+const dateLabel = new Date(d).toLocaleDateString('en-IN',{day:'numeric',month:'long',year:'numeric',timeZone:'UTC'});
 ---
 <Base title={`${event.data.title} | Janata Pratisthan`} description={event.data.excerpt}>
-  <main class="section"><article class="container article">
-    <a class="read" href="/events/">← All events</a><p style="margin-top:22px"><span class="tag">{event.data.category}</span></p>
-    <h1>{event.data.title}</h1><p class="muted">{dateLabel}{event.data.location ? ` · ${event.data.location}` : ''}</p>
-    {event.data.cover && <img class="article-cover" src={event.data.cover} alt={event.data.title} />}
-    <p class="muted" style="font-size:1.15rem">{event.data.excerpt}</p>
+  <main id="main-content" class="section"><article class="container article">
+    <a class="article-back" href="/events/"><span aria-hidden="true">←</span> Back to the journal</a>
+    <header class="article-head"><p><span class="tag">{event.data.category}</span></p><h1>{event.data.title}</h1><p class="muted">{dateLabel}{event.data.location ? ` · ${event.data.location}` : ''}</p></header>
+    {event.data.cover && <img class="article-cover" src={event.data.cover} alt={event.data.title} fetchpriority="high" />}
+    <p class="muted" style="font-size:1.2rem;line-height:1.7">{event.data.excerpt}</p>
     <div class="prose"><Content /></div>
-    {event.data.gallery?.length > 0 && <><h2 style="margin-top:42px">Event gallery</h2><div class="gallery">{event.data.gallery.map((photo) => <img src={photo} alt={`Photo from ${event.data.title}`} loading="lazy" />)}</div></>}
-    <p style="margin-top:45px"><a class="btn" href="/events/">Explore more events →</a></p>
+    {event.data.gallery?.length > 0 && <><h2 class="section-title" style="font-size:2.4rem;margin-top:48px">A closer look</h2><div class="gallery">{event.data.gallery.map((photo) => <img src={photo} alt={`Photo from ${event.data.title}`} loading="lazy" />)}</div></>}
+    <div style="border-top:1px solid var(--line);margin-top:55px;padding-top:28px"><a class="btn" href="/events/">Explore more stories <span aria-hidden="true">→</span></a></div>
   </article></main>
 </Base>
