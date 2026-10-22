@@ -3,7 +3,8 @@ import Base from '../../layouts/Base.astro';
 import { getCollection, render } from 'astro:content';
 export async function getStaticPaths() {
   const events = await getCollection('events', ({ data }) => !data.draft);
-  return events.map(event => ({   params: { slug: event.id },   props: { event } }));
+  const eventSlug = (event) => event.id || event.slug || event.data.slug || event.data.title.toLowerCase().trim().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+  return events.map(event => ({ params: { slug: eventSlug(event) }, props: { event } }));
 }
 const { event } = Astro.props;
 const { Content } = await render(event);
