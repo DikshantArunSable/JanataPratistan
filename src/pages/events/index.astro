@@ -3,15 +3,19 @@ import Base from '../../layouts/Base.astro';
 import { getCollection } from 'astro:content';
 const events = (await getCollection('events', ({ data }) => !data.draft)).sort((a,b) => new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf());
 const eventSlug = (event) => event.id || event.slug || event.data.slug || event.data.title.toLowerCase().trim().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
-const years = [...new Set(events.map(e => String(new Date(`${e.data.date}T12:00:00`).getFullYear())))];
-const dateLabel = d => new Date(`${d}T12:00:00`).toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'});
+const years = [...new Set(events.map(e => String(new Date(e.data.date).getFullYear())))];
+const dateLabel = d => new Date(d).toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric',timeZone:'UTC'});
 ---
-<Base title="Events & Blog | Janata Pratisthan" description="Browse Janata Pratisthan event stories, annual activities, and community updates.">
-  <main class="section"><div class="container"><div class="heading"><span class="eyebrow">Our journey, year by year</span><h1 style="font-size:clamp(2.4rem,5vw,4rem);line-height:1.1;letter-spacing:-2px">Events &amp; stories</h1><p>Browse our event archive, revisit important moments, and read the stories behind our community work.</p></div>
-    <div class="archive-tools"><input id="search" type="search" placeholder="Search events..." aria-label="Search events" /><select id="year" aria-label="Filter by year"><option value="all">All years</option>{years.map(year => <option value={year}>{year}</option>)}</select><select id="category" aria-label="Filter by category"><option value="all">All categories</option>{[...new Set(events.map(e=>e.data.category))].sort().map(cat=><option value={cat}>{cat}</option>)}</select></div>
-    {events.length ? <div class="grid" id="event-grid">{events.map(event => <article class="card event-card" data-title={event.data.title.toLowerCase()} data-year={new Date(`${event.data.date}T12:00:00`).getFullYear()} data-category={event.data.category}><a href={`/events/${eventSlug(event)}/`}>{event.data.cover && <img src={event.data.cover} alt={event.data.title} loading="lazy" />}<div class="card-content"><span class="tag">{event.data.category}</span><h3>{event.data.title}</h3><p>{event.data.excerpt}</p><div class="meta">{dateLabel(event.data.date)}{event.data.location ? ` · ${event.data.location}` : ''}</div><p class="read">Read event story →</p></div></a></article>)}</div> : <div class="empty">No published events yet. Add your first story in the CMS dashboard.</div>}
-    <p id="no-results" class="empty" hidden>No events match these filters.</p>
-  </div></main>
+<Base title="The Journal | Janata Pratisthan" description="Browse the events, community stories, and updates shared by Janata Pratisthan.">
+  <main id="main-content">
+    <section class="archive-hero"><div class="container"><span class="eyebrow">The Janata journal</span><h1>Stories worth<br />coming back to.</h1><p>A growing archive of events, ideas, and community moments. Search the journal to find a story or revisit a milestone.</p><div class="hero-meta">Explore the archive · Discover a story · Share the journey</div></div></section>
+    <section class="section"><div class="container">
+      <div class="section-topline"><div class="heading"><span class="eyebrow">Browse the collection</span><h2>All stories, in one place.</h2><p>Use the search and filters to explore the journal.</p></div><span class="meta">{events.length} {events.length === 1 ? 'story' : 'stories'} published</span></div>
+      <div class="archive-tools"><input id="search" type="search" placeholder="Search by title..." aria-label="Search stories" /><select id="year" aria-label="Filter by year"><option value="all">Every year</option>{years.map(year => <option value={year}>{year}</option>)}</select><select id="category" aria-label="Filter by category"><option value="all">Every category</option>{[...new Set(events.map(e=>e.data.category))].sort().map(cat=><option value={cat}>{cat}</option>)}</select></div>
+      {events.length ? <div class="grid" id="event-grid">{events.map(event => <article class="card event-card" data-title={event.data.title.toLowerCase()} data-year={new Date(event.data.date).getFullYear()} data-category={event.data.category}><a href={`/events/${eventSlug(event)}/`}><div class="card-image">{event.data.cover ? <img src={event.data.cover} alt={event.data.title} loading="lazy" /> : <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=900&q=80" alt="People gathered together" loading="lazy" />}</div><div class="card-content"><span class="tag">{event.data.category}</span><h3>{event.data.title}</h3><p>{event.data.excerpt}</p><div class="meta">{dateLabel(event.data.date)}{event.data.location ? ` · ${event.data.location}` : ''}</div><p class="read">Read the story <span aria-hidden="true">→</span></p></div></a></article>)}</div> : <div class="empty">No published stories yet. Add your first story through the CMS dashboard.</div>}
+      <p id="no-results" class="empty" hidden>No stories match these filters. Try another search.</p>
+    </div></section>
+  </main>
   <script is:inline>
     const search = document.querySelector('#search'), year = document.querySelector('#year'), category = document.querySelector('#category');
     const cards = [...document.querySelectorAll('.event-card')], empty = document.querySelector('#no-results');
