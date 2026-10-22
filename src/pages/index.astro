@@ -12,15 +12,8 @@ const dateLabel = d => new Date(d).toLocaleDateString('en-IN',{day:'numeric',mon
 <Base title="Janata Pratisthan | People first. Progress together." description="A closer look at the people, moments, and community initiatives that shape Janata Pratisthan.">
   <main id="main-content">
     <section class="hero">
-      <div class="container hero-grid">
-        <div class="hero-copy">
-          <span class="eyebrow">A community-led journal</span>
-          <h1>Progress begins when <span>people come first.</span></h1>
-          <p>Every meaningful change starts with people coming together. Explore the stories, events, and shared moments that make up the journey of Janata Pratisthan.</p>
-          <div class="actions"><a class="btn" href="#events">Explore the journal <span aria-hidden="true">↘</span></a><a class="btn btn-outline" href="#about">Discover our story</a></div>
-          <div class="hero-meta">Community · Stories · Shared progress</div>
-        </div>
-        <div class="hero-img-wrap hero-carousel" aria-label="Janata Pratisthan community photo carousel">
+      <div class="hero-carousel-stage">
+        <div class="hero-carousel hero-carousel-wide" aria-label="Janata Pratisthan community photo carousel">
           <div class="hero-slides" id="hero-slides">
             <figure class="hero-slide is-active" data-slide="0" aria-hidden="false"><img class="hero-img" src="/carousel/1.png" alt="Janata Pratisthan community members gathered together" fetchpriority="high" /><figcaption class="image-note">Together, we build stronger communities.</figcaption></figure>
             <figure class="hero-slide" data-slide="1" aria-hidden="true"><img class="hero-img" src="/carousel/2.png" alt="A community teaching and learning gathering" loading="lazy" /><figcaption class="image-note">Knowledge grows when it is shared.</figcaption></figure>
@@ -33,6 +26,13 @@ const dateLabel = d => new Date(d).toLocaleDateString('en-IN',{day:'numeric',mon
             <button class="hero-pause" type="button" id="hero-pause" aria-label="Pause automatic slideshow" aria-pressed="false">Ⅱ</button>
           </div>
         </div>
+      </div>
+      <div class="container hero-copy-below">
+        <span class="eyebrow">A community-led journal</span>
+        <h1>Progress begins when <span>people come first.</span></h1>
+        <p>Every meaningful change starts with people coming together. Explore the stories, events, and shared moments that make up the journey of Janata Pratisthan.</p>
+        <div class="actions"><a class="btn" href="#events">Explore the journal <span aria-hidden="true">↘</span></a><a class="btn btn-outline" href="#about">Discover our story</a></div>
+        <div class="hero-meta">Community · Stories · Shared progress</div>
       </div>
     </section>
     <section class="section" id="about">
