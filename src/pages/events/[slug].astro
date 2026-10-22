@@ -3,7 +3,7 @@ import Base from '../../layouts/Base.astro';
 import { getCollection, render } from 'astro:content';
 export async function getStaticPaths() {
   const events = await getCollection('events', ({ data }) => !data.draft);
-  return events.map(event => ({ params: { slug: event.slug }, props: { event } }));
+  return events.map(event => ({   params: { slug: event.id },   props: { event } }));
 }
 const { event } = Astro.props;
 const { Content } = await render(event);
