@@ -1,0 +1,14 @@
+# Content-hashed Astro assets can safely be cached for one year.
+/_astro/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# These public filenames are not content-hashed; use a shorter cache lifetime so replacements can propagate.
+/carousel/*
+  Cache-Control: public, max-age=604800
+
+/uploads/*
+  Cache-Control: public, max-age=604800
+
+# Keep HTML revalidating so fresh deployments are picked up promptly.
+/*
+  Cache-Control: public, max-age=0, must-revalidate
