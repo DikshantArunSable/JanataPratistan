@@ -64,7 +64,7 @@ const dateLabel = d => new Date(d).toLocaleDateString('en-IN',{day:'numeric',mon
         <div class="support-grid">
           <article class="support-card"><span class="tag">01 · Contribute</span><h3>Donate &amp; support</h3><p>Your contribution can help community-led learning, health awareness, and outreach activities. Please verify payment details with the organisation before transferring funds.</p><dl class="trust-details"><div><dt>Trust registration number</dt><dd>[Add verified registration number]</dd></div><div><dt>80G tax exemption</dt><dd>[Confirm 80G approval status before making any tax-deduction claim]</dd></div><div><dt>Bank / UPI details</dt><dd>[Publish verified account name, bank details, and UPI ID]</dd></div></dl><p class="meta">Do not transfer funds until official payment details are published and verified.</p></article>
           <article class="support-card"><span class="tag">02 · Volunteer</span><h3>Give your time</h3><p>Help with learning activities, community outreach, event support, translation, design, or digital skills.</p><a class="btn" href="#contact-details">Ask about volunteering <span aria-hidden="true">↗</span></a><p class="meta">Replace the email placeholder with the organisation's verified contact email before launch.</p></article>
-          <article class="support-card"><span class="tag">03 · Stay updated</span><h3>Community updates</h3><p>Get occasional notes about initiatives, events, and opportunities to take part.</p><form class="newsletter-form" id="newsletter-form" novalidate><label class="sr-only" for="newsletter-email">Email address</label><div class="newsletter-row"><input id="newsletter-email" name="email" type="email" autocomplete="email" inputmode="email" placeholder="you@example.com" aria-describedby="newsletter-status" required /><button class="btn" type="submit">Sign me up</button></div><p class="form-note" id="newsletter-status" role="status" aria-live="polite">This demo validates your email locally but does not subscribe you yet.</p></form></article>
+          <article class="support-card"><span class="tag">03 · Stay updated</span><h3>Community updates</h3><p>Get occasional notes about initiatives, events, and opportunities to take part.</p><form class="newsletter-form" id="newsletter-form"><label class="sr-only" for="newsletter-email">Email address</label><div class="newsletter-row"><input id="newsletter-email" name="email" type="email" autocomplete="email" inputmode="email" placeholder="Enter your email" aria-describedby="newsletter-status" required /><button class="btn" type="submit">Join</button></div><p class="form-note" id="newsletter-status" role="status" aria-live="polite">Enter your email to check the form. Subscription delivery is not connected yet.</p></form></article>
         </div>
       </div>
     </section>
@@ -125,16 +125,18 @@ const dateLabel = d => new Date(d).toLocaleDateString('en-IN',{day:'numeric',mon
       newsletterEmail.classList.remove('is-invalid');
       if (!newsletterEmail.value.trim() || !newsletterEmail.checkValidity()) {
         newsletterEmail.classList.add('is-invalid');
+        newsletterEmail.setAttribute('aria-invalid', 'true');
         newsletterStatus.textContent = 'Please enter a valid email address.';
         newsletterEmail.focus();
         return;
       }
-      newsletterStatus.textContent = 'Your email looks valid, but subscriptions are not enabled yet. Please check back soon.';
-      newsletterEmail.classList.remove('is-invalid');
+      newsletterEmail.removeAttribute('aria-invalid');
+      newsletterStatus.textContent = 'Thanks! Your email is valid, but newsletter delivery has not been connected yet, so you have not been subscribed.';
     });
     newsletterEmail?.addEventListener('input', () => {
       newsletterEmail.classList.remove('is-invalid');
-      if (newsletterStatus) newsletterStatus.textContent = 'This demo validates your email locally but does not subscribe you yet.';
+      newsletterEmail.removeAttribute('aria-invalid');
+      if (newsletterStatus) newsletterStatus.textContent = 'Subscription delivery is not connected yet.';
     });
 
     showHeroSlide(0);
