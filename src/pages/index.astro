@@ -5,7 +5,6 @@ const allEvents = await getCollection('events', ({ data }) => !data.draft);
 const events = allEvents.sort((a,b) => new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf());
 const featured = events.filter(e => e.data.featured).slice(0,5);
 const cards = featured.length ? featured : events.slice(0,5);
-const recent = events.slice(0,3);
 const eventSlug = (event) => event.id || event.slug || event.data.slug || event.data.title.toLowerCase().trim().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
 const dateLabel = d => new Date(d).toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric',timeZone:'UTC'});
 ---
