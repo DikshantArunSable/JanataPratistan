@@ -7,12 +7,35 @@ const { title = 'Janata Pratisthan | People first. Progress together.', descript
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="theme-color" content="#2373F4" />
+  <meta name="color-scheme" content="light" />
   <link rel="icon" type="image/png" href="/uploads/favicon.png" />
   <link rel="apple-touch-icon" href="/uploads/favicon.png" />
   <meta name="description" content={description} />
+  <meta name="robots" content="index,follow,max-image-preview:large" />
+  <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site ?? Astro.url).toString()} />
   <meta property="og:site_name" content="Janata Pratisthan" />
+  <meta property="og:type" content="website" />
   <meta property="og:title" content={title} />
   <meta property="og:description" content={description} />
+  <meta property="og:url" content={new URL(Astro.url.pathname, Astro.site ?? Astro.url).toString()} />
+  <meta property="og:image" content={new URL('/carousel/1.webp', Astro.site ?? Astro.url).toString()} />
+  <meta property="og:image:alt" content="Janata Pratisthan community members working together" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content={new URL('/carousel/1.webp', Astro.site ?? Astro.url).toString()} />
+  <script type="application/ld+json" set:html={JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'NGO',
+    name: 'Janata Pratisthan',
+    alternateName: 'जनता प्रतिष्ठान',
+    slogan: 'अत्त दीप भव',
+    description,
+    url: new URL('/', Astro.site ?? Astro.url).toString(),
+    logo: new URL('/uploads/janata-logo.png', Astro.site ?? Astro.url).toString(),
+    image: new URL('/carousel/1.webp', Astro.site ?? Astro.url).toString(),
+    nonprofitStatus: 'Nonprofit501c3'
+  })} />
   <title>{title}</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -45,6 +68,7 @@ const { title = 'Janata Pratisthan | People first. Progress together.', descript
 .impact-band h2{margin:0;font-family:var(--serif);font-size:clamp(2rem,4.3vw,3.8rem);line-height:1.08;letter-spacing:-.04em}.impact-band p{margin:0;line-height:1.85}
 .cta{padding:clamp(64px,8vw,112px) 0;background:linear-gradient(145deg,#e9f2ff,#f5faff 52%,#f7f8df)}
 .cta-inner{max-width:960px;margin:0 auto;text-align:center;background:linear-gradient(130deg,rgba(255,255,255,.94),rgba(226,241,255,.86) 60%,rgba(242,247,160,.55));box-shadow:0 24px 65px rgba(35,115,244,.12),inset 0 1px 0 #fff}
+.support-section{background:linear-gradient(180deg,#f7faff,#edf6ff)}.support-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;align-items:stretch}.support-card{min-width:0;padding:clamp(22px,3vw,32px);border:1px solid rgba(255,255,255,.98);border-radius:22px;background:linear-gradient(145deg,rgba(255,255,255,.96),rgba(228,240,255,.9));box-shadow:0 14px 38px rgba(31,75,135,.08),inset 0 1px 0 #fff}.support-card h3{font-family:var(--serif);font-size:1.7rem;line-height:1.15;margin:18px 0 10px}.support-card p{color:var(--glass-muted,var(--muted));font-size:.92rem}.trust-details{margin:22px 0}.trust-details div{padding:12px 0;border-top:1px solid var(--line)}.trust-details dt{font-size:.76rem;font-weight:800;color:var(--ink)}.trust-details dd{margin:4px 0 0;color:var(--muted);font-size:.86rem;overflow-wrap:anywhere}.newsletter-form{margin-top:22px}.newsletter-form label{display:block;margin-bottom:8px;font-size:.82rem;font-weight:750}.newsletter-row{display:flex;gap:8px;flex-wrap:wrap}.newsletter-row input{flex:1;min-width:150px;min-height:48px;padding:11px 13px;border:1px solid #cbd8ea;border-radius:8px;background:#fff;color:var(--ink)}.form-note{font-size:.76rem!important}.initiative-card .card-content{height:100%}.footer-contact{font-size:.86rem}.footer-contact a{text-decoration:underline;text-underline-offset:3px}.footer-links{gap:14px 20px}.footer-disclaimer{font-size:.76rem!important}@media(max-width:900px){.support-grid{grid-template-columns:1fr 1fr}}@media(max-width:650px){.support-grid{grid-template-columns:1fr}.newsletter-row{flex-direction:column}.newsletter-row .btn{width:100%}}
 footer{padding:48px 0 24px;background:linear-gradient(135deg,#eaf2ff,#f8fbff 55%,#f5f8e6);border-top:1px solid rgba(255,255,255,.95)}
 .footer-row>div{padding:24px;border:1px solid rgba(255,255,255,.96);border-radius:20px;background:rgba(255,255,255,.82);box-shadow:0 12px 30px rgba(35,75,130,.06);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
 .footer-row p,.copyright{color:var(--glass-muted)}.footer-links a{color:var(--glass-ink)}
@@ -65,6 +89,9 @@ footer{padding:48px 0 24px;background:linear-gradient(135deg,#eaf2ff,#f8fbff 55%
     <nav class="nav-links" aria-label="Main navigation"><a href="/#about">Our story</a><a href="/#events">Events</a><a href="/events/">Journal</a><a class="btn" href="/#support">Support us <span aria-hidden="true">↗</span></a></nav>
   </div></header>
   <slot />
-  <footer><div class="container"><div class="footer-row"><div><a class="brand" href="/" aria-label="Janata Pratisthan home"><img class="brand-logo" src="/uploads/janata-logo.png" alt="Janata Pratisthan — अत्त दीप भव" loading="lazy" /></a><p>A place for community stories, shared milestones, and the people who make progress possible.</p></div><div class="footer-links"><a href="/#about">Our story</a><a href="/events/">Events &amp; journal</a><a href="/#support">Support</a><a href="/events/">Explore stories</a></div></div><div class="copyright"><span>© {new Date().getFullYear()} Janata Pratisthan. All rights reserved.</span><span>Built around people. Designed for impact.</span></div></div></footer>
+  <footer id="contact-details"><div class="container"><div class="footer-row">
+    <div><a class="brand" href="/" aria-label="Janata Pratisthan home"><img class="brand-logo" src="/uploads/janata-logo.png" alt="Janata Pratisthan — अत्त दीप भव" width="500" height="160" loading="lazy" decoding="async" /></a><p>Community-led work rooted in dignity, shared learning, and the belief that every person can be a light to themselves.</p><p><strong>अत्त दीप भव</strong> · Be a light unto yourself.</p></div>
+    <div><h2 style="font-size:1rem;margin-top:0;color:var(--ink)">Contact &amp; transparency</h2><p class="footer-contact">Email: <strong>[Add verified official email]</strong><br />Location: <strong>[Confirm official city / operating address]</strong></p><p class="footer-disclaimer">Trust registration: [Add verified registration number]. 80G tax exemption: [Publish only after confirming valid approval]. Please verify all official details before making a donation.</p><nav class="footer-links" aria-label="Footer navigation"><a href="/#about">Our story</a><a href="/events/">Events &amp; journal</a><a href="/#initiatives">Initiatives</a><a href="/#support">Support us</a><a href="/privacy/">Privacy policy</a><a href="/terms/">Terms of use</a><a href="#contact-details" aria-label="Social media links to be added">Social links (coming soon)</a></nav></div>
+  </div><div class="copyright"><span>© {new Date().getFullYear()} Janata Pratisthan. All rights reserved.</span><span>अत्त दीप भव · Built around people.</span></div></div></footer>
 </body>
 </html>
