@@ -1,25 +1,25 @@
 ---
-title: "Community Learning Day"
-date: 2025-11-16
+title: "Educational Outreach"
+date: 2026-11-22
 category: Education
-location: Add venue and city
-excerpt: "A sample event story showing how Janata Pratisthan can share the people, activities, and outcomes behind its community work. Replace this with your real event details."
-cover: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=1200&q=85"
-featured: true
-draft: false
+location: "Venue to be confirmed"
+excerpt: "A proposed community education initiative focused on learning support, reading activities, and access to educational resources. Programme details will be confirmed with local participants and partners before announcement."
+cover: "/carousel/1.webp"
+featured: false
+draft: true
 gallery: []
 ---
 
-## About the event
+## About the initiative
 
-This is sample content for the Janata Pratisthan blog. Replace it with a factual account of the event, including its purpose, activities, and the people involved.
+This is a proposed initiative concept, not a report of a completed event. The programme should be developed with local families, educators, and community partners before it is announced.
 
-## Highlights
+## Possible activities
 
-- Add a verified highlight from the event.
-- Describe an activity or community outcome.
-- Thank volunteers, partners, and participants where appropriate.
+- Small-group reading and learning support.
+- Sharing information about accessible educational resources.
+- Volunteer-led sessions shaped around the needs identified by the community.
 
-## Looking ahead
+## Before announcing
 
-Share the next steps, lessons learned, or how readers can support similar initiatives.
+Confirm the date, venue, volunteer roles, safeguarding arrangements, and any partner organisations. Publish participation numbers or outcomes only after they have been verified.
