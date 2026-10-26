@@ -15,9 +15,9 @@ const dateLabel = d => new Date(d).toLocaleDateString('en-IN',{day:'numeric',mon
       <div class="hero-carousel-stage">
         <div class="hero-carousel hero-carousel-wide" aria-label="Janata Pratisthan community photo carousel">
           <div class="hero-slides" id="hero-slides">
-            <figure class="hero-slide is-active" data-slide="0" aria-hidden="false"><img class="hero-img" src="/carousel/1.png" alt="Janata Pratisthan community members gathered together" fetchpriority="high" /><figcaption class="image-note">Together, we build stronger communities.</figcaption></figure>
-            <figure class="hero-slide" data-slide="1" aria-hidden="true"><img class="hero-img" src="/carousel/2.png" alt="A community teaching and learning gathering" loading="lazy" /><figcaption class="image-note">Knowledge grows when it is shared.</figcaption></figure>
-            <figure class="hero-slide" data-slide="2" aria-hidden="true"><img class="hero-img" src="/carousel/3.png" alt="Community members taking part in a diya ceremony" loading="lazy" /><figcaption class="image-note">Tradition, dignity, and shared purpose.</figcaption></figure>
+            <figure class="hero-slide is-active" data-slide="0" aria-hidden="false"><picture><source srcset="/carousel/1.webp" type="image/webp" /><img class="hero-img" src="/carousel/1.png" width="1600" height="900" alt="Janata Pratisthan community members gathered together" fetchpriority="high" decoding="async" /></picture><figcaption class="image-note">Together, we build stronger communities.</figcaption></figure>
+            <figure class="hero-slide" data-slide="1" aria-hidden="true"><picture><source srcset="/carousel/2.webp" type="image/webp" /><img class="hero-img" src="/carousel/2.png" width="1600" height="900" alt="A community teaching and learning gathering" loading="lazy" decoding="async" /></picture><figcaption class="image-note">Knowledge grows when it is shared.</figcaption></figure>
+            <figure class="hero-slide" data-slide="2" aria-hidden="true"><picture><source srcset="/carousel/3.webp" type="image/webp" /><img class="hero-img" src="/carousel/3.png" width="1600" height="900" alt="Community members taking part in a diya ceremony" loading="lazy" decoding="async" /></picture><figcaption class="image-note">Tradition, dignity, and shared purpose.</figcaption></figure>
           </div>
           <div class="hero-carousel-controls">
             <button class="hero-arrow" type="button" id="hero-prev" aria-label="Previous photo">←</button>
