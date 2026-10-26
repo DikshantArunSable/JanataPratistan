@@ -14,9 +14,9 @@ const dateLabel = d => new Date(d).toLocaleDateString('en-IN',{day:'numeric',mon
       <div class="hero-carousel-stage">
         <div class="hero-carousel hero-carousel-wide" aria-label="Janata Pratisthan community photo carousel">
           <div class="hero-slides" id="hero-slides">
-            <figure class="hero-slide is-active" data-slide="0" aria-hidden="false"><picture><source srcset="/carousel/1.webp" type="image/webp" /><img class="hero-img" src="/carousel/1.png" width="1600" height="900" alt="Janata Pratisthan community members gathered together" fetchpriority="high" decoding="async" /></picture><figcaption class="image-note">Together, we build stronger communities.</figcaption></figure>
-            <figure class="hero-slide" data-slide="1" aria-hidden="true"><picture><source srcset="/carousel/2.webp" type="image/webp" /><img class="hero-img" src="/carousel/2.png" width="1600" height="900" alt="A community teaching and learning gathering" loading="lazy" decoding="async" /></picture><figcaption class="image-note">Knowledge grows when it is shared.</figcaption></figure>
-            <figure class="hero-slide" data-slide="2" aria-hidden="true"><picture><source srcset="/carousel/3.webp" type="image/webp" /><img class="hero-img" src="/carousel/3.png" width="1600" height="900" alt="Community members taking part in a diya ceremony" loading="lazy" decoding="async" /></picture><figcaption class="image-note">Tradition, dignity, and shared purpose.</figcaption></figure>
+            <figure class="hero-slide is-active" data-slide="0" aria-hidden="false"><picture><source srcset="/carousel/1.webp" type="image/webp" sizes="100vw" /><img class="hero-img" src="/carousel/1.webp" srcset="/carousel/1.webp 1600w" sizes="100vw" width="1600" height="900" alt="Janata Pratisthan community members gathered together" fetchpriority="high" decoding="async" /></picture><figcaption class="image-note">Together, we build stronger communities.</figcaption></figure>
+            <figure class="hero-slide" data-slide="1" aria-hidden="true"><picture><source srcset="/carousel/2.webp" type="image/webp" sizes="100vw" /><img class="hero-img" src="/carousel/2.webp" srcset="/carousel/2.webp 1600w" sizes="100vw" width="1600" height="900" alt="A community teaching and learning gathering" loading="lazy" decoding="async" /></picture><figcaption class="image-note">Knowledge grows when it is shared.</figcaption></figure>
+            <figure class="hero-slide" data-slide="2" aria-hidden="true"><picture><source srcset="/carousel/3.webp" type="image/webp" sizes="100vw" /><img class="hero-img" src="/carousel/3.webp" srcset="/carousel/3.webp 1600w" sizes="100vw" width="1600" height="900" alt="Community members taking part in a diya ceremony" loading="lazy" decoding="async" /></picture><figcaption class="image-note">Tradition, dignity, and shared purpose.</figcaption></figure>
           </div>
           <div class="hero-carousel-controls">
             <button class="hero-arrow" type="button" id="hero-prev" aria-label="Previous photo">←</button>
@@ -64,7 +64,7 @@ const dateLabel = d => new Date(d).toLocaleDateString('en-IN',{day:'numeric',mon
         <div class="support-grid">
           <article class="support-card"><span class="tag">01 · Contribute</span><h3>Donate &amp; support</h3><p>Your contribution can help community-led learning, health awareness, and outreach activities. Please verify payment details with the organisation before transferring funds.</p><dl class="trust-details"><div><dt>Trust registration number</dt><dd>[Add verified registration number]</dd></div><div><dt>80G tax exemption</dt><dd>[Confirm 80G approval status before making any tax-deduction claim]</dd></div><div><dt>Bank / UPI details</dt><dd>[Publish verified account name, bank details, and UPI ID]</dd></div></dl><p class="meta">Do not transfer funds until official payment details are published and verified.</p></article>
           <article class="support-card"><span class="tag">02 · Volunteer</span><h3>Give your time</h3><p>Help with learning activities, community outreach, event support, translation, design, or digital skills.</p><a class="btn" href="#contact-details">Ask about volunteering <span aria-hidden="true">↗</span></a><p class="meta">Replace the email placeholder with the organisation's verified contact email before launch.</p></article>
-          <article class="support-card"><span class="tag">03 · Stay updated</span><h3>Community updates</h3><p>Get occasional notes about initiatives, events, and opportunities to take part.</p><form class="newsletter-form" id="newsletter-form"><label for="newsletter-email">Email address</label><div class="newsletter-row"><input id="newsletter-email" name="email" type="email" autocomplete="email" placeholder="you@example.com" required /><button class="btn" type="submit">Sign me up</button></div><p class="form-note" id="newsletter-status" role="status" aria-live="polite">Newsletter delivery must be connected to a verified mailing-list service before collecting subscriptions.</p></form></article>
+          <article class="support-card"><span class="tag">03 · Stay updated</span><h3>Community updates</h3><p>Get occasional notes about initiatives, events, and opportunities to take part.</p><form class="newsletter-form" id="newsletter-form" novalidate><label class="sr-only" for="newsletter-email">Email address</label><div class="newsletter-row"><input id="newsletter-email" name="email" type="email" autocomplete="email" inputmode="email" placeholder="you@example.com" aria-describedby="newsletter-status" required /><button class="btn" type="submit">Sign me up</button></div><p class="form-note" id="newsletter-status" role="status" aria-live="polite">This demo validates your email locally but does not subscribe you yet.</p></form></article>
         </div>
       </div>
     </section>
@@ -116,6 +116,27 @@ const dateLabel = d => new Date(d).toLocaleDateString('en-IN',{day:'numeric',mon
     document.querySelector('.hero-carousel')?.addEventListener('focusin', stopHeroTimer);
     document.querySelector('.hero-carousel')?.addEventListener('focusout', startHeroTimer);
     document.addEventListener('visibilitychange', () => document.hidden ? stopHeroTimer() : startHeroTimer());
+    const newsletterForm = document.querySelector('#newsletter-form');
+    const newsletterEmail = document.querySelector('#newsletter-email');
+    const newsletterStatus = document.querySelector('#newsletter-status');
+    newsletterForm?.addEventListener('submit', event => {
+      event.preventDefault();
+      if (!newsletterEmail || !newsletterStatus) return;
+      newsletterEmail.classList.remove('is-invalid');
+      if (!newsletterEmail.value.trim() || !newsletterEmail.checkValidity()) {
+        newsletterEmail.classList.add('is-invalid');
+        newsletterStatus.textContent = 'Please enter a valid email address.';
+        newsletterEmail.focus();
+        return;
+      }
+      newsletterStatus.textContent = 'Your email looks valid, but subscriptions are not enabled yet. Please check back soon.';
+      newsletterEmail.classList.remove('is-invalid');
+    });
+    newsletterEmail?.addEventListener('input', () => {
+      newsletterEmail.classList.remove('is-invalid');
+      if (newsletterStatus) newsletterStatus.textContent = 'This demo validates your email locally but does not subscribe you yet.';
+    });
+
     showHeroSlide(0);
     startHeroTimer();
   </script>
