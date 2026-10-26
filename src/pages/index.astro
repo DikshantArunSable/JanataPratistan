@@ -9,7 +9,7 @@ const recent = events.slice(0,3);
 const eventSlug = (event) => event.id || event.slug || event.data.slug || event.data.title.toLowerCase().trim().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
 const dateLabel = d => new Date(d).toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric',timeZone:'UTC'});
 ---
-<Base title="Janata Pratisthan | अत्त दीप भव" description="Janata Pratisthan brings communities together through education, health awareness, youth skills, and local outreach. अत्त दीप भव — be a light unto yourself." />
+<Base title="Janata Pratisthan | अत्त दीप भव" description="Janata Pratisthan brings communities together through education, health awareness, youth skills, and local outreach. अत्त दीप भव — be a light unto yourself.">
   <main id="main-content">
     <section class="hero">
       <div class="hero-carousel-stage">
