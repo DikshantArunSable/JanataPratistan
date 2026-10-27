@@ -179,6 +179,25 @@ footer{padding:48px 0 24px;background:linear-gradient(135deg,#eaf2ff,#f8fbff 55%
       color: #0b2450 !important;
       text-decoration: underline !important;
     }
+    /* Final, high-specificity footer contrast override (wins over legacy glass styles). */
+    footer .footer-row p,
+    footer .footer-row p.footer-contact,
+    footer .footer-row p.footer-disclaimer,
+    footer .footer-row p strong,
+    footer .footer-row p a,
+    footer .footer-row .footer-links,
+    footer .footer-row .footer-links a,
+    footer .copyright,
+    footer .copyright span {
+      color: #263449 !important;
+      opacity: 1 !important;
+    }
+    footer .footer-row p.footer-disclaimer {
+      color: #374151 !important;
+    }
+    footer .footer-row .footer-links a {
+      color: #173b75 !important;
+    }
     footer .brand-logo { background: transparent; }
     footer .copyright { border-color: #cbd5e1 !important; }
   </style>
