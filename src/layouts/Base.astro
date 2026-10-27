@@ -149,10 +149,38 @@ footer{padding:48px 0 24px;background:linear-gradient(135deg,#eaf2ff,#f8fbff 55%
       text-decoration: underline !important;
     }
 
-    /* Keep footer text legible on its dark background. */
-    footer p, footer span, footer small { color: #f3f4f6 !important; }
-    footer a { color: #ffffff !important; }
-    footer a:hover, footer a:focus { color: #ffffff !important; }
+    /* Footer uses pale glass cards: maintain strong dark-on-light contrast. */
+    footer {
+      color: #17243a !important;
+      background: linear-gradient(135deg, #eaf2ff, #f8fbff 55%, #f5f8e6) !important;
+    }
+    footer .footer-row > div {
+      background: rgba(255, 255, 255, 0.96) !important;
+      border-color: #d8e1ee !important;
+    }
+    footer h2,
+    footer p,
+    footer span,
+    footer small,
+    footer strong,
+    footer .copyright,
+    footer .footer-links {
+      color: #263449 !important;
+    }
+    footer a,
+    footer .footer-links a {
+      color: #173b75 !important;
+      text-decoration-color: currentColor;
+    }
+    footer a:hover,
+    footer a:focus-visible,
+    footer .footer-links a:hover,
+    footer .footer-links a:focus-visible {
+      color: #0b2450 !important;
+      text-decoration: underline !important;
+    }
+    footer .brand-logo { background: transparent; }
+    footer .copyright { border-color: #cbd5e1 !important; }
   </style>
 </head>
 <body>
