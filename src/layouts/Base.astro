@@ -33,7 +33,7 @@ const { title = 'Janata Pratisthan | People first. Progress together.', descript
     slogan: 'अत्त दीप भव',
     description,
     url: new URL('/', Astro.site ?? Astro.url).toString(),
-    logo: new URL('/uploads/janata-logo.png', Astro.site ?? Astro.url).toString(),
+    logo: new URL('/uploads/janata-logo.webp', Astro.site ?? Astro.url).toString(),
     image: new URL('/carousel/1.webp', Astro.site ?? Astro.url).toString(),
 
   })} />
@@ -205,12 +205,12 @@ footer{padding:48px 0 24px;background:linear-gradient(135deg,#eaf2ff,#f8fbff 55%
 <body>
   <a class="skip-link" href="#main-content">Skip to content</a>
   <header class="navbar"><div class="container nav-inner">
-    <a class="brand" href="/" aria-label="Janata Pratisthan home"><img class="brand-logo" src="/uploads/janata-logo.png" alt="Janata Pratisthan — अत्त दीप भव" width="500" height="160" decoding="async" /></a>
+    <a class="brand" href="/" aria-label="Janata Pratisthan home"><img class="brand-logo" src="/uploads/janata-logo.webp" alt="Janata Pratisthan — अत्त दीप भव" width="500" height="160" decoding="async" /></a>
     <nav class="nav-links" aria-label="Main navigation"><a href="/#about">Our story</a><a href="/#events">Events</a><a href="/events/">Journal</a><a class="btn" href="/#support">Support us <span aria-hidden="true">↗</span></a></nav>
   </div></header>
   <slot />
   <footer id="contact-details"><div class="container"><div class="footer-row">
-    <div><a class="brand" href="/" aria-label="Janata Pratisthan home"><img class="brand-logo" src="/uploads/janata-logo.png" alt="Janata Pratisthan — अत्त दीप भव" width="500" height="160" loading="lazy" decoding="async" /></a><p>Community-led work rooted in dignity, shared learning, and the belief that every person can be a light to themselves.</p><p><strong>अत्त दीप भव</strong> · Be a light unto yourself.</p></div>
+    <div><a class="brand" href="/" aria-label="Janata Pratisthan home"><img class="brand-logo" src="/uploads/janata-logo.webp" alt="Janata Pratisthan — अत्त दीप भव" width="500" height="160" loading="lazy" decoding="async" /></a><p>Community-led work rooted in dignity, shared learning, and the belief that every person can be a light to themselves.</p><p><strong>अत्त दीप भव</strong> · Be a light unto yourself.</p></div>
     <div><h2 style="font-size:1rem;margin-top:0;color:var(--ink)">Contact &amp; transparency</h2><p class="footer-contact">Email: <strong>[Add verified official email]</strong><br />Location: <strong>[Confirm official city / operating address]</strong></p><p class="footer-disclaimer">Trust registration: [Add verified registration number]. 80G tax exemption: [Publish only after confirming valid approval]. Please verify all official details before making a donation.</p><nav class="footer-links" aria-label="Footer navigation"><a href="/#about">Our story</a><a href="/events/">Events &amp; journal</a><a href="/#initiatives">Initiatives</a><a href="/#support">Support us</a><a href="/privacy/">Privacy policy</a><a href="/terms/">Terms of use</a><a href="#contact-details" aria-label="Social media links to be added">Social links (coming soon)</a></nav></div>
   </div><div class="copyright"><span>© {new Date().getFullYear()} Janata Pratisthan. All rights reserved.</span><span>अत्त दीप भव · Built around people.</span></div></div></footer>
 </body>
