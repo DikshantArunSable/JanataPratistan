@@ -13,7 +13,7 @@ const { title = 'Janata Pratisthan | People first. Progress together.', descript
   <link rel="apple-touch-icon" href="/uploads/favicon.png" />
   <meta name="description" content={description} />
   <meta name="robots" content="index,follow,max-image-preview:large" />
-  <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site ?? Astro.url).toString()} />
+  <link rel="canonical" href="https://janatapratistan.sdikshant25.workers.dev/" />
   <meta property="og:site_name" content="Janata Pratisthan" />
   <meta property="og:type" content="website" />
   <meta property="og:title" content={title} />
@@ -105,6 +105,54 @@ footer{padding:48px 0 24px;background:linear-gradient(135deg,#eaf2ff,#f8fbff 55%
     .form-note{color:#374151!important;font-size:.78rem}
     .sr-only{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
     @media(max-width:520px){.newsletter-row{flex-direction:column}.newsletter-row .btn{align-self:flex-start}}
+
+    /* --- WCAG AA Contrast Fixes for PageSpeed --- */
+    .badge,
+    .tag,
+    article span,
+    section span,
+    span[class*="tag"],
+    span[class*="badge"] {
+      color: #111827 !important;
+      font-weight: 600 !important;
+    }
+
+    figcaption,
+    time,
+    small,
+    .note,
+    .disclaimer,
+    p[class*="meta"],
+    p[class*="note"],
+    dl dt,
+    dl dd {
+      color: #374151 !important;
+    }
+
+    h1 + p,
+    h2 + p,
+    .eyebrow,
+    .section-subtitle {
+      color: #1f2937 !important;
+    }
+
+    footer p,
+    footer span,
+    footer a,
+    footer small {
+      color: #1f2937 !important;
+    }
+
+    footer a:hover,
+    footer a:focus {
+      color: #000000 !important;
+      text-decoration: underline !important;
+    }
+
+    /* Keep footer text legible on its dark background. */
+    footer p, footer span, footer small { color: #f3f4f6 !important; }
+    footer a { color: #ffffff !important; }
+    footer a:hover, footer a:focus { color: #ffffff !important; }
   </style>
 </head>
 <body>
